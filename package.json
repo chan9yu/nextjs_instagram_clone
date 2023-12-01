@@ -1,12 +1,12 @@
 {
-	"name": "nextjs_boiler_plate",
+	"name": "nextjs_instagram_clone",
 	"private": true,
 	"version": "0.1.0",
-	"description": "nextjs boiler plate repository",
+	"description": "nextjs instagram clone repository",
 	"author": "chan9yu <wry5533@gmail.com>",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/chan9yu/nextjs_boiler_plate"
+		"url": "https://github.com/chan9yu/nextjs_instagram_clone"
 	},
 	"lint-staged": {
 		"**/*.{ts,tsx}": [
@@ -41,6 +41,7 @@
 		"@types/react-dom": "^18.0.0",
 		"@typescript-eslint/eslint-plugin": "^6.12.0",
 		"@typescript-eslint/parser": "^6.12.0",
+		"autoprefixer": "^10.4.16",
 		"commitizen": "^4.3.0",
 		"eslint": "^8.0.0",
 		"eslint-config-next": "14.0.3",
@@ -49,7 +50,9 @@
 		"eslint-plugin-react-hooks": "^4.6.0",
 		"husky": "^8.0.3",
 		"lint-staged": "^15.1.0",
+		"postcss": "^8.4.31",
 		"prettier": "^3.1.0",
+		"tailwindcss": "^3.3.5",
 		"typescript": "^5.3.2"
 	}
 }
