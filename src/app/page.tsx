@@ -1,3 +1,3 @@
 export default function HomePage() {
-	return <h1>Instagram</h1>;
+	return <h1 className="text-gray-900">Instagram</h1>;
 }

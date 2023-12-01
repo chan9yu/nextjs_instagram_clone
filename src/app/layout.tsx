@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { Open_Sans } from 'next/font/google';
 
 import type { ChildrenProps } from '../@types/common';
+import Navbar from '../components/common/Navbar';
 import './globals.css';
 
 const openSans = Open_Sans({ subsets: ['latin'] });
@@ -21,8 +22,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: ChildrenProps) {
 	return (
-		<html lang="ko">
-			<body className={openSans.className}>{children}</body>
+		<html lang="ko" className={openSans.className}>
+			<body className="w-full max-w-screen-xl overflow-auto mx-auto">
+				<header className="sticky top-0 bg-white z-10 border-b">
+					<Navbar />
+				</header>
+				<main>{children}</main>
+			</body>
 		</html>
 	);
 }
