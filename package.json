@@ -9,7 +9,7 @@
 		"url": "https://github.com/chan9yu/nextjs_instagram_clone"
 	},
 	"lint-staged": {
-		"**/*.{ts,tsx}": [
+		"src/*.{ts,tsx}": [
 			"eslint --fix",
 			"prettier --write"
 		]

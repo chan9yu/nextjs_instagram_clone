@@ -45,3 +45,4 @@ tmp/
 out/
 cache/
 *.stories.tsx
+sanity-studio/
