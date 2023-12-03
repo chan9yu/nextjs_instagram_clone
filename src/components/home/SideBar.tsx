@@ -11,7 +11,7 @@ export default function SideBar({ user: { email, name, username, image } }: Side
 	return (
 		<>
 			<div className="flex items-center">
-				{image && <Avatar image={image} />}
+				{image && <Avatar image={image} size="lg" />}
 				<div className="ml-4">
 					<p className="font-bold">{username}</p>
 					<p className="text-lg text-neutral-500 leading-4">{name}</p>

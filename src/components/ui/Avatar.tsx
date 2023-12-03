@@ -1,6 +1,8 @@
+type AvatarSize = 'sm' | 'md' | 'lg';
+
 type AvatarProps = {
 	image?: string | null;
-	size?: 'sm' | 'md';
+	size?: AvatarSize;
 	highlight?: boolean;
 };
 
@@ -18,14 +20,30 @@ export default function Avatar({ highlight = false, image = null, size = 'md' }:
 	);
 }
 
-function getContainerStyle(size: 'sm' | 'md', highlight: boolean) {
+function getContainerSize(size: AvatarSize) {
+	const sizeStyle = {
+		sm: 'w-9 h-9',
+		md: 'w-11 h-11',
+		lg: 'w-[68px] h-[68px]'
+	}[size];
+
+	return sizeStyle;
+}
+
+function getContainerStyle(size: AvatarSize, highlight: boolean) {
 	const baseStyle = 'rounded-full flex justify-center items-center';
 	const highlightStyle = highlight ? 'bg-gradient-to-bl from-fuchsia-600 via-rose-500 to-amber-300' : '';
-	const sizeStyle = size === 'sm' ? 'w-9 h-9' : 'w-[68px] h-[68px]';
+	const sizeStyle = getContainerSize(size);
 
 	return `${baseStyle} ${highlightStyle} ${sizeStyle}`;
 }
 
-function getImageSizeStyle(size: 'sm' | 'md') {
-	return size === 'sm' ? 'w-[34px] h-[34px] p-[0.1rem]' : 'w-16 h-16 p-[0.2rem]';
+function getImageSizeStyle(size: AvatarSize) {
+	const sizeStyle = {
+		sm: 'w-[34px] h-[34px] p-[0.1rem]',
+		md: 'w-[42px] h-[42px] p-[0.1rem]',
+		lg: 'w-16 h-16 p-[0.2rem]'
+	}[size];
+
+	return sizeStyle;
 }
