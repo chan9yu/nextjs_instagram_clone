@@ -3,6 +3,7 @@ import { Open_Sans } from 'next/font/google';
 
 import type { ChildrenProps } from '../@types/common';
 import Navbar from '../components/common/Navbar';
+import AuthContext from '../context/AuthContext';
 import './globals.css';
 
 const openSans = Open_Sans({ subsets: ['latin'] });
@@ -24,10 +25,12 @@ export default function RootLayout({ children }: ChildrenProps) {
 	return (
 		<html lang="ko" className={openSans.className}>
 			<body className="w-full max-w-screen-xl overflow-auto mx-auto">
-				<header className="sticky top-0 bg-white z-10 border-b">
-					<Navbar />
-				</header>
-				<main>{children}</main>
+				<AuthContext>
+					<header className="sticky top-0 bg-white z-10 border-b">
+						<Navbar />
+					</header>
+					<main>{children}</main>
+				</AuthContext>
 			</body>
 		</html>
 	);
