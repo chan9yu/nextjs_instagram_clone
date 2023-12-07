@@ -3,7 +3,7 @@
 import { SWRConfig } from 'swr';
 import type { ChildrenProps } from '../@types/common';
 
-export default function SWRConfigContext({ children }: ChildrenProps) {
+export default function SWRConfigProvider({ children }: ChildrenProps) {
 	return (
 		<SWRConfig
 			value={{
