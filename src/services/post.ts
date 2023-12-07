@@ -1,4 +1,4 @@
-import type { SimplePost } from '../@types/custom/post';
+import type { FullPost, SimplePost } from '../@types/custom/post';
 import { client, urlFor } from './sanity';
 
 const simplePostProjection = `
@@ -10,16 +10,41 @@ const simplePostProjection = `
   "text": comments[0].comment,
   "comments": count(comments),
   "id": _id,
-  "createdAt": _createdAt,
+  "createdAt": _createdAt
 `;
 
 export async function getFollowingPostsOf(username: string) {
 	return client
 		.fetch(
-			`*[_type == "post" && author -> username == "${username}" 
-      || author._ref in *[_type == "user" && username == "${username}"].following[]._ref]
-      | order(_createdAt desc){${simplePostProjection}
-    }`
+			`*[_type == "post" && author -> username == "${username}"
+        || author._ref in *[_type == "user" && username == "${username}"].following[]._ref]
+        | order(_createdAt desc){
+        ${simplePostProjection}
+      }`
 		)
 		.then((posts: SimplePost[]) => posts.map(post => ({ ...post, image: urlFor(post.image) })));
+}
+
+export async function getPost(id: string): Promise<FullPost> {
+	return client
+		.fetch(
+			`*[_type == "post" && _id == "${id}"][0]{
+        ...,
+        "username": author -> username,
+        "userImage": author -> image,
+        "image": photo,
+        "likes": likes[] -> username,
+        comments[]{
+          comment, 
+          "username": author -> username,
+          "image": author -> image
+        },
+        "id":_id,
+        "createdAt":_creatdAt
+      }`
+		)
+		.then(post => ({
+			...post,
+			image: urlFor(post.image)
+		}));
 }
