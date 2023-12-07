@@ -25,12 +25,14 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: ChildrenProps) {
 	return (
 		<html lang="ko" className={openSans.className}>
-			<body className="w-full max-w-screen-xl overflow-auto mx-auto">
+			<body className="w-full bg-neutral-50 overflow-auto">
 				<AuthProvider>
 					<header className="sticky top-0 bg-white z-10 border-b">
-						<Navbar />
+						<div className="max-w-screen-xl mx-auto">
+							<Navbar />
+						</div>
 					</header>
-					<main className="w-full min-h-full flex justify-center bg-neutral-50">
+					<main className="w-full flex justify-center">
 						<SWRConfigProvider>{children}</SWRConfigProvider>
 					</main>
 				</AuthProvider>
