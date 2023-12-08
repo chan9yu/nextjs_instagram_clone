@@ -3,7 +3,7 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import useSWR from 'swr';
 
-import type { ProfileUser } from '../../@types/custom/user';
+import type { SearchUser } from '../../@types/custom/user';
 import useDebounce from '../../hooks/useDebounce';
 import GridSpinner from '../ui/GridSpinner';
 import UserCard from './UserCard';
@@ -12,7 +12,7 @@ export default function UserSearch() {
 	const [keyword, setKeyword] = useState('');
 	const debounceKeyword = useDebounce(keyword);
 
-	const { data: users, error, isLoading } = useSWR<ProfileUser[]>(`/api/search/${debounceKeyword}`);
+	const { data: users, error, isLoading } = useSWR<SearchUser[]>(`/api/search/${debounceKeyword}`);
 
 	const handleChangeKeyword = (e: ChangeEvent<HTMLInputElement>) => {
 		setKeyword(e.target.value);

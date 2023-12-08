@@ -1,10 +1,10 @@
 import Link from 'next/link';
 
-import type { ProfileUser } from '../../@types/custom/user';
+import type { SearchUser } from '../../@types/custom/user';
 import Avatar from '../ui/Avatar';
 
 type UserCardProps = {
-	user: ProfileUser;
+	user: SearchUser;
 };
 
 export default function UserCard({ user: { email, followers, following, name, username, image } }: UserCardProps) {

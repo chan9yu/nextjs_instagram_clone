@@ -1,8 +1,8 @@
-import type { User } from '../../@types/custom/user';
+import type { AuthUser } from '../../@types/custom/user';
 import Avatar from '../ui/Avatar';
 
 type SideBarProps = {
-	user: User;
+	user: AuthUser;
 };
 
 const currentYear = new Date().getFullYear();

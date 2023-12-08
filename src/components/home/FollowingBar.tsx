@@ -4,12 +4,12 @@ import Link from 'next/link';
 import { PropagateLoader } from 'react-spinners';
 import useSWR from 'swr';
 
-import type { DetailUser } from '../../@types/custom/user';
+import type { HomeUser } from '../../@types/custom/user';
 import Avatar from '../ui/Avatar';
 import ScrollableBar from './ScrollableBar';
 
 export default function FollowingBar() {
-	const { data, isLoading, error } = useSWR<DetailUser>('api/me');
+	const { data, isLoading, error } = useSWR<HomeUser>('api/me');
 	const users = data?.following && [...data.following, ...data.following, ...data.following];
 
 	return (
