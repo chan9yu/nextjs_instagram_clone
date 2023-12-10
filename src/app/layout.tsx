@@ -10,8 +10,11 @@ import './globals.css';
 const openSans = Open_Sans({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-	title: 'nextjs boiler plate',
-	description: 'nextjs boiler plate repository',
+	title: {
+		default: 'Instagram Clone',
+		template: 'Instagram Clone | %s'
+	},
+	description: 'Instagram Clone Photos',
 	icons: [
 		{
 			rel: 'icon',
@@ -32,7 +35,7 @@ export default function RootLayout({ children }: ChildrenProps) {
 							<Navbar />
 						</div>
 					</header>
-					<main className="w-full flex justify-center">
+					<main className="w-full max-w-screen-xl flex justify-center mx-auto">
 						<SWRConfigProvider>{children}</SWRConfigProvider>
 					</main>
 				</AuthProvider>
