@@ -1,21 +1,19 @@
 'use client';
 
-import useSWR from 'swr';
-
 import type { ChildrenProps } from '../../@types/common';
-import type { HomeUser, ProfileUser } from '../../@types/custom/user';
+import type { ProfileUser } from '../../@types/custom/user';
+import useMe from '../../hooks/useMe';
 import Button from '../ui/Button';
 
 type FollowButtonProps = ChildrenProps & {
 	user: ProfileUser;
 };
 
-export default function FollowButton({ user, children }: FollowButtonProps) {
-	const { username } = user;
-	const { data: loggedInUser, error, isLoading } = useSWR<HomeUser>('/api/me');
+export default function FollowButton({ user: { username }, children }: FollowButtonProps) {
+	const { user } = useMe();
 
-	const showButton = loggedInUser && loggedInUser.username !== username;
-	const following = loggedInUser && loggedInUser.following.find(item => item.username === username);
+	const showButton = user && user.username !== username;
+	const following = user && user.following.find(item => item.username === username);
 
 	const text = following ? 'Unfollow' : 'Follow';
 
