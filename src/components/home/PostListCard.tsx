@@ -5,10 +5,10 @@ import { useState } from 'react';
 
 import type { SimplePost } from '../../@types/custom/post';
 import ModalPortal from '../common/ModalPortal';
+import PostDetail from '../common/PostDetail';
+import PostModal from '../common/PostModal';
 import Actionbar from './Actionbar';
 import CommentForm from './CommentForm';
-import PostDetail from './PostDetail';
-import PostModal from './PostModal';
 import PostUserAvatar from './PostUserAvatar';
 
 type PostListCardProps = {

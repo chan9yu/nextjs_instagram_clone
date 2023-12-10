@@ -4,9 +4,9 @@ import useSWR from 'swr';
 
 import type { FullPost } from '../../@types/custom/post';
 import Avatar from '../ui/Avatar';
-import Actionbar from './Actionbar';
-import CommentForm from './CommentForm';
-import PostUserAvatar from './PostUserAvatar';
+import Actionbar from '../home/Actionbar';
+import CommentForm from '../home/CommentForm';
+import PostUserAvatar from '../home/PostUserAvatar';
 
 type PostDetailProps = {
 	postId: string;

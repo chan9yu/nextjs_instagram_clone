@@ -1,7 +1,7 @@
 import { MouseEvent } from 'react';
 
 import type { ChildrenProps } from '../../@types/common';
-import CloseIcon from '../ui/icons/CloseIcon';
+import CloseIcon from '../ui/icons/CloseIncon';
 
 type PostModalProps = ChildrenProps & {
 	onClose: () => void;
