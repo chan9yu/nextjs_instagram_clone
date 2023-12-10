@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation';
 import FollowingBar from '../components/home/FollowingBar';
 import PostList from '../components/home/PostList';
 import SideBar from '../components/home/SideBar';
-import { authOptions } from './api/auth/[...nextauth]/route';
+import { authOptions } from '../utils/auth';
 
 export default async function HomePage() {
 	const session = await getServerSession(authOptions);
