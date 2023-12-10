@@ -43,7 +43,7 @@ export default function PostGridCard({ post, priority = false }: PostGridCardPro
 			{openModal && (
 				<ModalPortal>
 					<PostModal onClose={handleCloseModal}>
-						<PostDetail postId={post.id} />
+						<PostDetail post={post} />
 					</PostModal>
 				</ModalPortal>
 			)}

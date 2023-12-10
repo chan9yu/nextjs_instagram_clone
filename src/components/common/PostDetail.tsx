@@ -2,18 +2,20 @@ import Image from 'next/image';
 import { GridLoader } from 'react-spinners';
 import useSWR from 'swr';
 
-import type { FullPost } from '../../@types/custom/post';
-import Avatar from '../ui/Avatar';
+import type { FullPost, SimplePost } from '../../@types/custom/post';
 import Actionbar from '../home/Actionbar';
 import CommentForm from '../home/CommentForm';
 import PostUserAvatar from '../home/PostUserAvatar';
+import Avatar from '../ui/Avatar';
 
 type PostDetailProps = {
-	postId: string;
+	post: SimplePost;
 };
 
-export default function PostDetail({ postId }: PostDetailProps) {
-	const { data, isLoading } = useSWR<FullPost>(`/api/posts/${postId}`);
+export default function PostDetail({ post }: PostDetailProps) {
+	const { id, image, userImage, username } = post;
+
+	const { data, isLoading } = useSWR<FullPost>(`/api/posts/${id}`);
 
 	if (isLoading) {
 		return (
@@ -23,11 +25,7 @@ export default function PostDetail({ postId }: PostDetailProps) {
 		);
 	}
 
-	if (!data) {
-		return null;
-	}
-
-	const { comments, createdAt, image, likes, text, userImage, username } = data;
+	const comments = data?.comments;
 
 	return (
 		<section className="flex w-full h-full">
@@ -48,7 +46,7 @@ export default function PostDetail({ postId }: PostDetailProps) {
 							</li>
 						))}
 				</ul>
-				<Actionbar likes={likes} username={username} createdAt={createdAt} />
+				<Actionbar post={post} />
 				<CommentForm />
 			</div>
 		</section>

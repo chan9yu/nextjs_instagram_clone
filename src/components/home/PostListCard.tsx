@@ -36,13 +36,13 @@ export default function PostListCard({ post, priority = false }: PostListCardPro
 				priority={priority}
 				onClick={handleOpenModal}
 			/>
-			<Actionbar createdAt={createdAt} likes={likes} text={text} username={username} />
+			<Actionbar post={post} />
 			<CommentForm />
 			{openModal && (
 				<ModalPortal>
 					<div className="fixed top-0 left-0 w-full h-full z-[1001]">
 						<PostModal onClose={handleCloseModal}>
-							<PostDetail postId={post.id} />
+							<PostDetail post={post} />
 						</PostModal>
 					</div>
 				</ModalPortal>

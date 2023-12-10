@@ -11,7 +11,7 @@ export type SimplePost = Omit<FullPost, 'comments'> & {
 export type FullPost = {
 	createdAt: string;
 	id: string;
-	likes: string[] | null;
+	likes: string[];
 	text: string;
 	comments: Comment[];
 	username: string;
