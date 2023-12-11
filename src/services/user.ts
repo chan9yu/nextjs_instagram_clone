@@ -21,9 +21,9 @@ export async function getUserByUsername(username: string) {
 		*[_type == "user" && username == "${username}"][0]{
 			...,
 			"id": _id,
-			"bookmarks": bookmarks[] -> _id
+			"bookmarks": bookmarks[] -> _id,
 			followers[] -> { username, image },
-			following[] -> { username, image },
+			following[] -> { username, image }
 		}`;
 
 	return client.fetch(query);

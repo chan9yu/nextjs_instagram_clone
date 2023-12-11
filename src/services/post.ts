@@ -39,7 +39,7 @@ export async function getPost(id: string): Promise<FullPost> {
 				"username": author -> username,
 				"image": author -> image
 			},
-			"createdAt":_creatdAt
+			"createdAt":_creatdAt,
 			"id":_id,
 			"image": photo,
 			"likes": likes[] -> username,
@@ -108,7 +108,6 @@ export async function addComment(postId: string, userId: string, comment: string
 }
 
 // export async function createPost(userId: string, text: string, file: Blob) {
-// 	console.log(userId, text, file);
 
 // 	return fetch(assetsURL, {
 // 		method: 'POST',
