@@ -9,12 +9,12 @@ export type SimplePost = Omit<FullPost, 'comments'> & {
 };
 
 export type FullPost = {
+	comments: Comment[];
 	createdAt: string;
 	id: string;
+	image: string;
 	likes: string[];
 	text: string;
-	comments: Comment[];
-	username: string;
 	userImage: string;
-	image: string;
+	username: string;
 };

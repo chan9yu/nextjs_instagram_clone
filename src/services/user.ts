@@ -6,64 +6,62 @@ export async function addUser({ email, id, name, username, image }: OAuthUser) {
 	return client.createIfNotExists({
 		_id: id,
 		_type: 'user',
-		username,
 		email,
 		name,
+		username,
 		image,
-		following: [],
+		bookmarks: [],
 		followers: [],
-		bookmarks: []
+		following: []
 	});
 }
 
 export async function getUserByUsername(username: string) {
-	return client.fetch(
-		`*[_type == "user" && username == "${username}"][0]{
-      ...,
-      "id": _id,
-      following[] -> { username, image },
-      followers[] -> { username, image },
-      "bookmarks": bookmarks[] -> _id
-    }`
-	);
+	const query = `
+		*[_type == "user" && username == "${username}"][0]{
+			...,
+			"id": _id,
+			"bookmarks": bookmarks[] -> _id
+			followers[] -> { username, image },
+			following[] -> { username, image },
+		}`;
+
+	return client.fetch(query);
 }
 
 export async function searchUsers(keyword?: string): Promise<SearchUser[]> {
-	const query = keyword ? `&& (name match "${keyword}") || (username match "${keyword}")` : '';
-	return client
-		.fetch(
-			`*[_type == "user" ${query}]{
-      ...,
-      "following": count(following),
-      "followers": count(followers),
-    }`
-		)
-		.then((users: SearchUser[]) =>
-			users.map(user => ({
-				...user,
-				following: user.following ?? 0,
-				followers: user.followers ?? 0
-			}))
-		);
+	const query = `
+		*[_type == "user" ${keyword ? `&& (name match "${keyword}") || (username match "${keyword}")` : ''}]{
+			...,
+			"followers": count(followers),
+			"following": count(following),
+		}`;
+
+	return client.fetch(query).then((users: SearchUser[]) =>
+		users.map(user => ({
+			...user,
+			followers: user.followers ?? 0,
+			following: user.following ?? 0
+		}))
+	);
 }
 
 export async function getUserForProfile(username: string) {
-	return client
-		.fetch(
-			`*[_type == "user" && username == "${username}"][0]{
-      ...,
-      "id": _id,
-      "following": count(following),
-      "followers": count(followers),
-      "posts": count(*[_type == "post" && author -> username == "${username}"])
-    }`
-		)
-		.then(user => ({
-			...user,
-			following: user.following ?? 0,
-			followers: user.followers ?? 0,
-			posts: user.posts ?? 0
-		}));
+	const query = `
+		*[_type == "user" && username == "${username}"][0]{
+			...,
+			"id": _id,
+			"posts": count(*[_type == "post" && author -> username == "${username}"]),
+			"followers": count(followers),
+			"following": count(following),
+		}`;
+
+	return client.fetch(query, undefined, { cache: 'no-store' }).then(user => ({
+		...user,
+		posts: user.posts ?? 0,
+		followers: user.followers ?? 0,
+		following: user.following ?? 0
+	}));
 }
 
 export async function addBookmark(userId: string, postId: string) {
