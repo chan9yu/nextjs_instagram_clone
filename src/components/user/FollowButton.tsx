@@ -24,8 +24,6 @@ export default function FollowButton({ user: { id: targetId, username } }: Follo
 	const following = me && me.following?.find(item => item.username === username);
 	const text = following ? 'Unfollow' : 'Follow';
 
-	console.log('### me.following', me?.following);
-
 	const handleFollow = async () => {
 		if (!me) return;
 		setIsFetching(true);
