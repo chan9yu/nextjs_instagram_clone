@@ -1,17 +1,9 @@
-import useSWR from 'swr';
-
-import type { SimplePost } from '../../@types/custom/post';
-import { TAB_TYPE } from '../../constants/user';
+import usePosts from '../../hooks/usePosts';
 import GridSpinner from '../ui/GridSpinner';
 import PostGridCard from './PostGridCard';
 
-type PostGridProps = {
-	tab: TAB_TYPE;
-	username: string;
-};
-
-export default function PostGrid({ tab, username }: PostGridProps) {
-	const { data: posts, error, isLoading } = useSWR<SimplePost[]>(`/api/users/${username}/${tab}`);
+export default function PostGrid() {
+	const { posts, isLoading } = usePosts();
 
 	return (
 		<div className="w-full text-center">

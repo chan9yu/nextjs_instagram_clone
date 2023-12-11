@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 import type { ProfileUser } from '../../@types/custom/user';
 import { TAB_TYPE } from '../../constants/user';
+import CacheKeysContext from '../../contexts/CacheKeysContext';
 import BookmarkIcon from '../ui/icons/BookmarkIcon';
 import HeartIcon from '../ui/icons/HeartIcon';
 import PostIcon from '../ui/icons/PostIcon';
@@ -40,7 +41,9 @@ export default function UserPosts({ user: { username } }: UserPostsProps) {
 					</li>
 				))}
 			</ul>
-			<PostGrid tab={tab} username={username} />
+			<CacheKeysContext.Provider value={{ postsKey: `/api/users/${username}/${tab}` }}>
+				<PostGrid />
+			</CacheKeysContext.Provider>
 		</section>
 	);
 }
