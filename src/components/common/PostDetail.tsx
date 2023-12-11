@@ -30,7 +30,7 @@ export default function PostDetail({ post: simplePost }: PostDetailProps) {
 		);
 	}
 
-	const { comments, createdAt, id, image, likes, text, userImage, username } = fullPost;
+	const { comments, image, userImage, username } = fullPost;
 
 	return (
 		<section className="flex w-full h-full">

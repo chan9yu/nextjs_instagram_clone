@@ -17,7 +17,7 @@ type PostListCardProps = {
 };
 
 export default function PostListCard({ post, priority = false }: PostListCardProps) {
-	const { comments, createdAt, id, image, likes, text, userImage, username } = post;
+	const { comments, image, text, userImage, username } = post;
 
 	const [openModal, setOpenModal] = useState(false);
 

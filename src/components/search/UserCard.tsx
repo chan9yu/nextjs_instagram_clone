@@ -7,7 +7,7 @@ type UserCardProps = {
 	user: SearchUser;
 };
 
-export default function UserCard({ user: { email, followers, following, name, username, image } }: UserCardProps) {
+export default function UserCard({ user: { followers, following, name, username, image } }: UserCardProps) {
 	return (
 		<Link
 			aria-label="User Profile"

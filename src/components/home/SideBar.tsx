@@ -7,7 +7,7 @@ type SideBarProps = {
 
 const currentYear = new Date().getFullYear();
 
-export default function SideBar({ user: { email, name, username, image } }: SideBarProps) {
+export default function SideBar({ user: { name, username, image } }: SideBarProps) {
 	return (
 		<>
 			<div className="flex items-center">
