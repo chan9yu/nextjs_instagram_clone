@@ -3,8 +3,8 @@ import { Open_Sans } from 'next/font/google';
 
 import type { ChildrenProps } from '../@types/common';
 import Navbar from '../components/common/Navbar';
-import AuthProvider from '../providers/AuthProvider';
-import SWRConfigProvider from '../providers/SWRConfigProvider';
+import AuthContext from '../contexts/AuthContext';
+import SWRConfigContext from '../contexts/SWRConfigContext';
 import './globals.css';
 
 const openSans = Open_Sans({ subsets: ['latin'] });
@@ -29,16 +29,16 @@ export default function RootLayout({ children }: ChildrenProps) {
 	return (
 		<html lang="ko" className={openSans.className}>
 			<body className="w-full bg-neutral-50 overflow-auto">
-				<AuthProvider>
+				<AuthContext>
 					<header className="sticky top-0 bg-white z-10 border-b">
 						<div className="max-w-screen-xl mx-auto">
 							<Navbar />
 						</div>
 					</header>
 					<main className="w-full max-w-screen-xl flex justify-center mx-auto">
-						<SWRConfigProvider>{children}</SWRConfigProvider>
+						<SWRConfigContext>{children}</SWRConfigContext>
 					</main>
-				</AuthProvider>
+				</AuthContext>
 			</body>
 		</html>
 	);
