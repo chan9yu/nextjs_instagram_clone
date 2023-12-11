@@ -48,7 +48,7 @@ export default function PostListCard({ post, priority = false }: PostListCardPro
 					{text}
 				</p>
 				{comments > 1 && (
-					<button className="font-bold my-2 text-sky-500" onClick={handleOpenModal}>
+					<button className="font-bold my-2 text-sky-700" onClick={handleOpenModal}>
 						{`View all ${comments} comments`}
 					</button>
 				)}

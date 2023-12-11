@@ -17,17 +17,20 @@ const MENU_LIST = [
 	{
 		href: '/',
 		icon: <HomeIcon />,
-		checkedIcon: <HomeFillIcon />
+		checkedIcon: <HomeFillIcon />,
+		title: 'Home'
 	},
 	{
 		href: '/search',
 		icon: <SearchIcon />,
-		checkedIcon: <SearchFillIcon />
+		checkedIcon: <SearchFillIcon />,
+		title: 'Search Users'
 	},
 	{
 		href: '/new',
 		icon: <NewIcon />,
-		checkedIcon: <NewFillIcon />
+		checkedIcon: <NewFillIcon />,
+		title: 'New Post'
 	}
 ];
 
@@ -47,19 +50,21 @@ export default function Navbar() {
 
 	return (
 		<div className="flex justify-between items-center px-6">
-			<Link href="/">
+			<Link aria-label="Home" href="/">
 				<h1 className="text-3xl font-bold">Instagram</h1>
 			</Link>
 			<nav>
 				<ul className="flex gap-4 items-center p-4">
 					{MENU_LIST.map(menu => (
 						<li key={menu.href}>
-							<Link href={menu.href}>{pathName === menu.href ? menu.checkedIcon : menu.icon}</Link>
+							<Link aria-label={menu.title} href={menu.href}>
+								{pathName === menu.href ? menu.checkedIcon : menu.icon}
+							</Link>
 						</li>
 					))}
 					{user && (
 						<li>
-							<Link href={`/user/${user.username}`}>
+							<Link aria-label="User Profile" href={`/user/${user.username}`}>
 								<Avatar image={user.image} highlight size="sm" />
 							</Link>
 						</li>

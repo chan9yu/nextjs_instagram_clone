@@ -10,6 +10,7 @@ type UserCardProps = {
 export default function UserCard({ user: { email, followers, following, name, username, image } }: UserCardProps) {
 	return (
 		<Link
+			aria-label="User Profile"
 			className="flex items-center gap-2 w-full rounded-sm border border-neutral-300 mb-2 p-4 bg-white hover:bg-neutral-50"
 			href={`/user/${username}`}
 		>
