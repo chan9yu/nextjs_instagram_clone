@@ -5,7 +5,7 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement>;
 export default function Button({ children, className, style, ...rest }: ButtonProps) {
 	return (
 		<button
-			className={`border-none rounded-md py-2 px-8 text-white font-bold leading-4  ${className}`}
+			className={`border-none rounded-md py-2 px-8 text-white font-bold leading-4 bg-sky-500 ${className}`}
 			style={style}
 			{...rest}
 		>
