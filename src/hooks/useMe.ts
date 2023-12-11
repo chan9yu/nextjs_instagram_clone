@@ -11,6 +11,14 @@ async function updateBookmark(postId: string, bookmark: boolean) {
 	return data;
 }
 
+async function updateFollow(targetId: string, follow: boolean) {
+	const body = JSON.stringify({ id: targetId, follow });
+	const res = await fetch('/api/follow', { method: 'PUT', body });
+	const data = res.json();
+
+	return data;
+}
+
 export default function useMe() {
 	const { data: user, error, isLoading, mutate } = useSWR<HomeUser>('/api/me');
 
@@ -34,10 +42,20 @@ export default function useMe() {
 		[mutate, user]
 	);
 
+	const toggleFollow = useCallback(
+		(targetId: string, follow: boolean) => {
+			return mutate(updateFollow(targetId, follow), {
+				populateCache: false
+			});
+		},
+		[mutate]
+	);
+
 	return {
 		user,
 		error,
 		isLoading,
-		setBookmark
+		setBookmark,
+		toggleFollow
 	};
 }

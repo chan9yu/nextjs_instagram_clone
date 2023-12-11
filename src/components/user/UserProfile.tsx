@@ -21,7 +21,7 @@ export default function UserProfile({ user }: UserProfileProps) {
 			<div className="md:ml-10 basis-1/3">
 				<div className="flex flex-col items-center md:flex-row">
 					<h1 className="text-2xl md:mr-8 my-2 md:mb-0">{username}</h1>
-					<FollowButton user={user}>FollowButton</FollowButton>
+					<FollowButton user={user} />
 				</div>
 				<ul className="my-4 flex gap-4">
 					{info.map(({ data, title }, index) => (
