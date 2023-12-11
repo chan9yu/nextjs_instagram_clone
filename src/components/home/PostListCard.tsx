@@ -3,12 +3,12 @@
 import Image from 'next/image';
 import { useState } from 'react';
 
-import type { SimplePost } from '../../@types/custom/post';
+import type { Comment, SimplePost } from '../../@types/custom/post';
+import usePosts from '../../hooks/usePosts';
 import ModalPortal from '../common/ModalPortal';
 import PostDetail from '../common/PostDetail';
 import PostModal from '../common/PostModal';
 import Actionbar from './Actionbar';
-import CommentForm from './CommentForm';
 import PostUserAvatar from './PostUserAvatar';
 
 type PostListCardProps = {
@@ -24,6 +24,12 @@ export default function PostListCard({ post, priority = false }: PostListCardPro
 	const handleOpenModal = () => setOpenModal(true);
 	const handleCloseModal = () => setOpenModal(false);
 
+	const { postComment } = usePosts();
+
+	const handlePostComment = (comment: Comment) => {
+		postComment(post, comment);
+	};
+
 	return (
 		<article className="rounded-lg shadow-md border border-gray-200">
 			<PostUserAvatar userImage={userImage} username={username} />
@@ -36,8 +42,17 @@ export default function PostListCard({ post, priority = false }: PostListCardPro
 				priority={priority}
 				onClick={handleOpenModal}
 			/>
-			<Actionbar post={post} />
-			<CommentForm />
+			<Actionbar post={post} onComment={handlePostComment}>
+				<p>
+					<span className="font-bold mr-1">{username}</span>
+					{text}
+				</p>
+				{comments > 1 && (
+					<button className="font-bold my-2 text-sky-500" onClick={handleOpenModal}>
+						{`View all ${comments} comments`}
+					</button>
+				)}
+			</Actionbar>
 			{openModal && (
 				<ModalPortal>
 					<div className="fixed top-0 left-0 w-full h-full z-[1001]">

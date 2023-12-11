@@ -1,4 +1,5 @@
-import type { SimplePost } from '../../@types/custom/post';
+import type { ChildrenProps } from '../../@types/common';
+import type { Comment, SimplePost } from '../../@types/custom/post';
 import useMe from '../../hooks/useMe';
 import usePosts from '../../hooks/usePosts';
 import { parasDate } from '../../utils/data';
@@ -7,13 +8,15 @@ import BookmarkFillIcon from '../ui/icons/BookmarkFillIcon';
 import BookmarkIcon from '../ui/icons/BookmarkIcon';
 import HeartFillIcon from '../ui/icons/HeartFillIcon';
 import HeartIcon from '../ui/icons/HeartIcon';
+import CommentForm from './CommentForm';
 
-type ActionbarProps = {
+type ActionbarProps = ChildrenProps & {
+	onComment: (comment: Comment) => void;
 	post: SimplePost;
 };
 
-export default function Actionbar({ post }: ActionbarProps) {
-	const { createdAt, id, likes, text, username } = post;
+export default function Actionbar({ onComment, post, children }: ActionbarProps) {
+	const { createdAt, id, likes } = post;
 
 	const { user, setBookmark } = useMe();
 	const { setLike } = usePosts();
@@ -24,6 +27,10 @@ export default function Actionbar({ post }: ActionbarProps) {
 
 	const handleBookmark = (bookmark: boolean) => {
 		user && setBookmark(id, bookmark);
+	};
+
+	const handleComment = (comment: string) => {
+		user && onComment({ comment, username: user.username, image: user.image });
 	};
 
 	const bookmarked = user?.bookmarks.includes(id) ?? false;
@@ -48,14 +55,10 @@ export default function Actionbar({ post }: ActionbarProps) {
 			</div>
 			<div className="px-4 py-1">
 				<p className="text-sm font-bold mb-2">{`${likeCount} ${likeCount > 1 ? 'likes' : 'like'}`}</p>
-				{text && (
-					<p>
-						<span className="font-bold mr-1">{username}</span>
-						{text}
-					</p>
-				)}
+				{children}
 				<p className="text-xs text-neutral-500 uppercase my-2">{parasDate(createdAt)}</p>
 			</div>
+			<CommentForm onPostComment={handleComment} />
 		</>
 	);
 }

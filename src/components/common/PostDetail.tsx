@@ -1,10 +1,9 @@
 import Image from 'next/image';
 import { GridLoader } from 'react-spinners';
-import useSWR from 'swr';
 
-import type { FullPost, SimplePost } from '../../@types/custom/post';
+import type { SimplePost } from '../../@types/custom/post';
+import usePost from '../../hooks/usePost';
 import Actionbar from '../home/Actionbar';
-import CommentForm from '../home/CommentForm';
 import PostUserAvatar from '../home/PostUserAvatar';
 import Avatar from '../ui/Avatar';
 
@@ -12,10 +11,8 @@ type PostDetailProps = {
 	post: SimplePost;
 };
 
-export default function PostDetail({ post }: PostDetailProps) {
-	const { id, image, userImage, username } = post;
-
-	const { data, isLoading } = useSWR<FullPost>(`/api/posts/${id}`);
+export default function PostDetail({ post: simplePost }: PostDetailProps) {
+	const { post: fullPost, isLoading, postComment } = usePost(simplePost.id);
 
 	if (isLoading) {
 		return (
@@ -25,7 +22,15 @@ export default function PostDetail({ post }: PostDetailProps) {
 		);
 	}
 
-	const comments = data?.comments;
+	if (!fullPost) {
+		return (
+			<div className="w-full h-full flex justify-center items-center">
+				<GridLoader color="red" size={8} />
+			</div>
+		);
+	}
+
+	const { comments, createdAt, id, image, likes, text, userImage, username } = fullPost;
 
 	return (
 		<section className="flex w-full h-full">
@@ -46,8 +51,7 @@ export default function PostDetail({ post }: PostDetailProps) {
 							</li>
 						))}
 				</ul>
-				<Actionbar post={post} />
-				<CommentForm />
+				<Actionbar post={simplePost} onComment={postComment} />
 			</div>
 		</section>
 	);
