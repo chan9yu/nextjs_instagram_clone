@@ -29,11 +29,11 @@ function getImageSizeStyle(size: AvatarSize): ImageSizeStyle {
 	const sizeStyle = {
 		sm: {
 			container: 'w-9 h-9',
-			image: "'w-[34px] h-[34px] p-[0.1rem]'"
+			image: 'w-[34px] h-[34px] p-[0.1rem]'
 		},
 		md: {
 			container: 'w-11 h-11',
-			image: "'w-[42px] h-[42px] p-[0.1rem]'"
+			image: 'w-[42px] h-[42px] p-[0.1rem]'
 		},
 		lg: {
 			container: 'w-[68px] h-[68px]',
